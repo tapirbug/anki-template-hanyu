@@ -1,0 +1,49 @@
+{{FrontSide}}
+
+<hr id=answer>
+
+<dl class="translations">
+  <dt>
+    汉字
+  </dt>
+  <dd>
+    {{汉字}}
+  </dd>
+  <dt>
+    汉语
+  </dt>
+  <dd>
+    {{tts zh_CN:汉字}}
+    <tts style="display: none" service="android" voice="zh_CN">
+      {{text:汉字}}
+    </tts>
+  </dd>
+  <dt>
+    Deutsch
+  </dt>
+  <dd>
+    {{Deutsch}}
+  </dd>
+</dl>
+
+<script type="module">
+  if (process.env.NODE_ENV !== 'production') {
+    const pattern = "{{FrontSide}}"
+    import('bundle-text:./front.html')
+      .then(html => {
+        for (child of document.body.childNodes) {
+          const text = child.textContent
+          const patternIdx = text.indexOf(pattern)
+          if (patternIdx >= 0) {
+            // resolve first {{FrontSide}} (just for dev), which also includes the CSS/KS
+            const front = document.createElement('div')
+            front.innerHTML = html
+            const beforeDirective = document.createTextNode(text.substring(0, patternIdx))
+            const afterDirective = document.createTextNode(text.substring(patternIdx + pattern.length))
+            child.replaceWith(beforeDirective, front, afterDirective)
+            return // stop after first
+          }
+        }
+      })
+  }
+</script>

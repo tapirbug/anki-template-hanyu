@@ -1,0 +1,41 @@
+{
+  "name": "anki-template-hanyu",
+  "version": "0.0.1",
+  "description": "Anki template for learning to write, speak and understand Mandarin Chinese",
+  "repository": "https://github.com/tapirbug/anki-template-hanyu",
+  "author": "Philipp Stadler <hello@phstadler.com>",
+  "license": "MIT",
+  "dependencies": {
+    "hanzi-writer": "^3.5.0"
+  },
+  "devDependencies": {
+    "@parcel/optimizer-data-url": "2.8.3",
+    "@parcel/transformer-inline-string": "2.8.3",
+    "parcel": "^2.8.3"
+  },
+  "source": [
+    "src/index.html",
+    "src/hear/front.html",
+    "src/hear/back.html",
+    "src/read_hanzi/front.html",
+    "src/read_hanzi/back.html",
+    "src/read_pinyin/front.html",
+    "src/read_pinyin/back.html",
+    "src/speak/front.html",
+    "src/speak/back.html",
+    "src/write/front.html",
+    "src/write/back.html"
+  ],
+  "targets": {
+    "default": {
+      "context": "browser",
+      "outputFormat": "global"
+    }
+  },
+  "browserslist": "Chrome < 21",
+  "scripts": {
+    "dev": "(sleep 3; xdg-open http://localhost:1234/) & parcel serve",
+    "clean": "rm -rf anki-template-hanyu-$npm_package_version *.build-in-progress",
+    "build": "yarn run clean && parcel build --no-source-maps --dist-dir=anki-template-hanyu-$npm_package_version.build-in-progress && mv anki-template-hanyu-$npm_package_version.build-in-progress anki-template-hanyu-$npm_package_version"
+  }
+}

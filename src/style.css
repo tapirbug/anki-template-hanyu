@@ -1,0 +1,43 @@
+.card {
+  font-family: arial;
+  font-size: 20px;
+  text-align: center;
+  color: black;
+  background-color: white;
+ }
+ 
+ .exercise-kind {
+   font-size: 0.5em;
+   color: rgba(0, 0, 0, 0.5);
+   text-align: left;
+ }
+ 
+ .nightMode .exercise-kind {
+   color: rgba(255, 255, 255, 0.5);
+ }
+ 
+ hr#answer {
+   border: none;
+   height: 0.5em;
+   background: rgba(0, 0, 0, 0.12);
+ }
+ 
+ .nightMode hr#answer {
+   border: none;
+   height: 0.5em;
+   background: rgba(255, 255, 255, 0.12);
+ }
+ 
+ .translations dt {
+   font-size: 0.6em;
+   color: rgba(0, 0, 0, 0.5);
+ }
+ 
+ .nightMode dt {
+   color: rgba(255, 255, 255, 0.5);
+ }
+ 
+ .translations dd {
+   margin: 0 0 0.5em 0;
+   padding: 0;
+ }

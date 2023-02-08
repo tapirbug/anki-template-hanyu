@@ -1,0 +1,6 @@
+node_modules
+dist
+*.build-in-progress
+anki-template-hanyu-*
+.parcel-cache
+yarn-error.log
