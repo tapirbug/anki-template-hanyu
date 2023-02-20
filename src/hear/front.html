@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="data-url:../style.css">
+<link rel="stylesheet" href="data-url:./hear.css">
 
 <aside class="exercise-kind">
   {{Card}}
@@ -8,10 +9,10 @@
   <dt>
     汉语
   </dt>
-  <dd id="t2s-player-container">
-    {{tts zh_CN:汉字}}
-    <tts style="display: none" service="android" voice="zh_CN">
+  <dd id="t2s-player-container" class="t2s-player-container">
+    <tts class="anki-mobile-player-fallback" service="android" voice="zh_CN">
       {{text:汉字}}
     </tts>
+    {{tts zh_CN:汉字}}
   </dd>
 </dl>
