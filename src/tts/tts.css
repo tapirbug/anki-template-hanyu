@@ -1,0 +1,19 @@
+/* Show an appropriate tts widget for each platform */
+
+/* Anki Droid */
+:root.android .anki-builtin-player,
+:root.android .anki-web-player {
+   display: none;
+}
+
+/* Desktop Anki */
+:root:is(.linux, .win, .mac) .anki-droid-player,
+:root:is(.linux, .win, .mac) .anki-web-player {
+   display: none;
+}
+
+/* Anki Web and Testing */
+:root:not(.android, .linux, .win, .mac) .anki-builtin-player,
+:root:not(.android, .linux, .win, .mac) .anki-droid-player {
+   display: none;
+}

@@ -1,5 +1,7 @@
+@import url(./tts/tts.css);
+
 .card {
-  font-family: arial;
+  font-family: "Fira Sans", arial;
   font-size: 20px;
   text-align: center;
   color: black;

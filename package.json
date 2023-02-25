@@ -1,6 +1,6 @@
 {
   "name": "anki-template-hanyu",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "Anki template for learning to write, speak and understand Mandarin Chinese",
   "repository": "https://github.com/tapirbug/anki-template-hanyu",
   "author": "Philipp Stadler <hello@phstadler.com>",
@@ -34,7 +34,7 @@
   },
   "browserslist": "Chrome < 21",
   "scripts": {
-    "dev": "(sleep 3; xdg-open http://localhost:1234/) & parcel serve",
+    "dev": "parcel serve",
     "clean": "rm -rf anki-template-hanyu-$npm_package_version *.build-in-progress",
     "build": "yarn run clean && parcel build --no-source-maps --dist-dir=anki-template-hanyu-$npm_package_version.build-in-progress && mv anki-template-hanyu-$npm_package_version.build-in-progress anki-template-hanyu-$npm_package_version"
   }
