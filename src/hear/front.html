@@ -9,22 +9,22 @@
     汉语
   </dt>
   <dd id="t2s-player-container" class="t2s-player-container">
-    <div class="anki-web-player" id="anki-web-player"></div>
-    <tts class="anki-droid-player" service="android" voice="zh_CN">
+    <div class="anki-droid-player">
+      <tts style="display: none" service="android" voice="zh_CN">
+        {{text:汉字}}
+      </tts>
+    </div>
+    <div class="anki-web-player">
       {{text:汉字}}
-    </tts>
+    </div>
     <div class="anki-builtin-player">
       {{tts zh_CN:汉字}}
     </div>
   </dd>
+  
 </dl>
 
 <script type="module">
-  import { createTts } from '../components/tts/tts'
-  createTts({
-    addTo: 'anki-web-player',
-    text: '{{text:汉字}}',
-    lang: ["cmn", "zh-cn", "zh_cn", "zh"],
-    showText: false
-  })
+  import { init } from '../components/tts/init'
+  init()
 </script>

@@ -13,7 +13,9 @@
     Strichfolge
   </dt>
   <dd>
-    <div id="strichfolge-animation">Lädt</div>
+    <div id="strichfolge-animation" class="strichfolge-animation">
+      {{text:汉字}}
+    </div>
   </dd>
   <dt>
     Pīnyīn
@@ -25,24 +27,19 @@
     汉语
   </dt>
   <dd id="t2s-player-container" class="t2s-player-container">
-    <div class="anki-web-player" id="anki-web-player"></div>
-    <tts class="anki-droid-player" service="android" voice="zh_CN">
+    <div class="anki-droid-player">
+      <tts style="display: none" service="android" voice="zh_CN">
+        {{text:汉字}}
+      </tts>
+    </div>
+    <div class="anki-web-player">
       {{text:汉字}}
-    </tts>
+    </div>
     <div class="anki-builtin-player">
       {{tts zh_CN:汉字}}
     </div>
   </dd>
 </dl>
-
-<script type="module">
-  import { createTts } from '../components/tts/tts'
-  createTts({
-    addTo: 'anki-web-player',
-    text: '{{text:汉字}}',
-    lang: ["cmn", "zh-cn", "zh_cn", "zh"]
-  })
-</script>
 
 <script type="module">
   if (process.env.NODE_ENV !== 'production') {
@@ -67,6 +64,10 @@
 </script>
 
 <script type="module">
-  import { createWriter } from '../components/write.ts'
-  createWriter({ text: '{{text:汉字}}' })
+  import { init } from '../components/write/init'
+  init()
+</script>
+<script type="module">
+  import { init } from '../components/tts/init'
+  init()
 </script>

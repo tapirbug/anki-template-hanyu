@@ -15,6 +15,7 @@ interface Write {
 }
 
 interface WriterOpts {
+  addTo: Element
   text: string
 }
 
@@ -37,13 +38,13 @@ interface Writer {
 
 /// Adds a Hanzi writer into the element with the ID defined above.
 export function createWriter(opts: WriterOpts): void {
-  const container = document.getElementById(globalId);
-  if (!container) {
+  const container = opts.addTo;
+  if (!(container instanceof Element)) {
     throw new Error(`Could not find element #${globalId} for the Hanz writer`)
   }
   const oldWriteState = getState()
   if (isWriteError(oldWriteState)) {
-    container.innerText = `Previous error, not trying again: ${oldWriteState.msg}`
+    container.replaceChildren(`Previous error, not trying again: ${oldWriteState.msg}`)
     return
   }
   try {
@@ -61,7 +62,7 @@ export function createWriter(opts: WriterOpts): void {
       msg: `${error}`
     }
     window[globalId] = writeError
-    container.innerText = `Error: ${writeError.msg}`
+    container.replaceChildren(`Error: ${writeError.msg}`)
   }
 }
 
@@ -76,7 +77,7 @@ function getState(): Write {
 }
 
 /// Creates the necessary state and DOM elements for the later animations.
-function initWriter(container: HTMLElement, opts: WriterOpts): WriteReady {
+function initWriter(container: Element, opts: WriterOpts): WriteReady {
   const nightMode = document.getElementsByClassName('nightMode').length > 0
   const colorBg = nightMode ? '#909090' : '#999999'
   const colorFg = nightMode ? '#FFFFFF' : '#222222'

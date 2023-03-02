@@ -1,0 +1,22 @@
+#debug-container {
+  max-height: 30vh;
+  overflow-y: scroll;
+}
+
+/* fiddle with this to change the log level */
+#debug-container .trace,
+#debug-container .info {
+  display: none;
+}
+
+#debug-container .trace {
+  color: grey;
+}
+
+#debug-container .info {
+  color: black;
+}
+
+#debug-container .error {
+  color: darkred;
+}

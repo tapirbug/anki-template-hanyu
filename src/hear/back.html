@@ -10,6 +10,14 @@
     {{汉字}}
   </dd>
   <dt>
+    Strichfolge
+  </dt>
+  <dd>
+    <div id="strichfolge-animation" class="strichfolge-animation">
+      {{text:汉字}}
+    </div>
+  </dd>
+  <dt>
     Pīnyīn
   </dt>
   <dd>
@@ -26,21 +34,30 @@
 <script type="module">
   if (process.env.NODE_ENV !== 'production') {
     const pattern = "{{FrontSide}}"
-    import('bundle-text:./front.html')
-      .then(html => {
-        for (child of document.body.childNodes) {
+    Promise.all([
+      import('../components/tts/init'),
+      import('bundle-text:./front.html')
+    ]).then(([ { init }, html ]) => {
+      for (child of document.body.childNodes) {
           const text = child.textContent
           const patternIdx = text.indexOf(pattern)
           if (patternIdx >= 0) {
-            // resolve first {{FrontSide}} (just for dev), which also includes the CSS/JS
+            // resolve first {{FrontSide}} (just for dev), which also includes the CSS
             const front = document.createElement('div')
             front.innerHTML = html
             const beforeDirective = document.createTextNode(text.substring(0, patternIdx))
             const afterDirective = document.createTextNode(text.substring(patternIdx + pattern.length))
             child.replaceWith(beforeDirective, front, afterDirective)
+            // also initialize the TTS from the front (not sure why the script does not kick in)
+            init()
             return // stop after first
           }
         }
-      })
+    })
   }
+</script>
+
+<script type="module">
+  import { init } from '../components/write/init'
+  init()
 </script>

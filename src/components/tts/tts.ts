@@ -1,3 +1,5 @@
+import * as debug from '../debug'
+
 export interface TtsOptsMandatory {
   /**
    * The text to speak, this is the only mandatory property.
@@ -11,7 +13,7 @@ export interface TtsOptsWithDefaults {
    * parent element in the document. If left out, appends to the end of the
    * body.
    */
-  addTo: string | HTMLElement
+  addTo: string | Element
   /**
    * Prefer a voice with a language code that has the specified language as a
    * substring, e.g. specifing `"zh"` will accept any chinese voice. Can also
@@ -24,18 +26,6 @@ export interface TtsOptsWithDefaults {
   lang: string|string[]
   /** Default: true */
   autoplay: boolean
-  /**
-   * Do not initialize the TTS player if the html element includes any of these
-   * classes.
-   * 
-   * This avoids initializing more than one TTS implementation, which could
-   * lead to multiple parallel autoplays, which would probably sound terrible.
-   * 
-   * If not specified, does not create a player on Linux, Windows, Mac,
-   * Android, all of which have their own working built-in TTS solution that
-   * can be used instead of this player.
-   */
-  skipOnPlatforms: string[]
 }
 
 /**
@@ -54,42 +44,19 @@ type TtsOptsBuilt = TtsOptsMandatory & TtsOptsWithDefaults
 const defaultOpts : TtsOptsWithDefaults = {
   addTo: document.body,
   autoplay: true,
-  lang: [],
-  skipOnPlatforms: [
-    'linux',
-    'win',
-    'mac',
-    'android'
-  ]
+  lang: []
 }
 
 export function createTts(requestedOpts: TtsOpts) {
   const opts = buildOpts(requestedOpts)
-
-  const htmlClasses = document.body.parentElement?.classList
-  if (htmlClasses === null) {
-    console.error('no classlist support, cannot detect platform')
-    return
-  }
-  if (opts.skipOnPlatforms.some(p => htmlClasses?.contains(p))) {
-    console.log('skipping TTS intialization relying on native TTS service')
-    return
-  }
-
-  if (typeof window.speechSynthesis === 'undefined') {
-    console.error('speechSynthesis not found, cannot initialize TTS player')
-    return
-  }
-
-  try {
-    const container = intoElement(opts.addTo)
-    const speak = speakFn(opts);
-    container.appendChild(renderPlayer(opts, speak))
-    if (opts.autoplay) {
-      speak()
-    }
-  } catch (error) {
-    document.body.append(`Error: ${error}`)
+  const container = intoElement(opts.addTo)
+  const speak = speakFn(opts);
+  const player = renderPlayer(opts, speak)
+  // clear any elements or text previously in there
+  container.replaceChildren()
+  container.appendChild(player)
+  if (opts.autoplay) {
+    speak()
   }
 }
 
@@ -108,8 +75,8 @@ function buildOpts(given: TtsOpts): TtsOptsBuilt {
   if (typeof opts.text !== 'string') {
     throw new Error(`Invalid text to speak, must specify a string: ${given.addTo}`)
   }
-  if (typeof opts.addTo !== 'string' && !(given.addTo instanceof HTMLElement)) {
-    throw new Error(`Invalid addTo, set to HTMLElement or string or leave out: ${given.addTo}`)
+  if (typeof opts.addTo !== 'string' && !(given.addTo instanceof Element)) {
+    throw new Error(`Invalid addTo, set to Element or string or leave out: ${given.addTo}`)
   }
   if (typeof opts.lang !== 'string' && !Array.isArray(given.lang)) {
     throw new Error(`Invalid lang, set to array or string or leave out: ${given.lang}`)
@@ -117,20 +84,28 @@ function buildOpts(given: TtsOpts): TtsOptsBuilt {
   if (typeof opts.autoplay !== 'boolean') {
     throw new Error(`Invalid autoplay, set to boolean or leave out: ${given.autoplay}`)
   }
-  if (!Array.isArray(opts.skipOnPlatforms)) {
-    throw new Error(`Invalid skipOnPlatforms, set to array of strings or leave out: ${given.autoplay}`)
-  }
   return opts
 }
 
-function renderPlayer(opts: TtsOptsBuilt, speak: () => void): HTMLElement {
+function renderPlayer(opts: TtsOptsBuilt, speak: () => void): Element {
   const player = document.createElement('button')
   player.innerText = '▶'
   player.addEventListener('click', speak)
   return player
 }
 
+/**
+ * Creates a function that uses the speechSynthesis browser API to speak the
+ * text specified with the opts.
+ * 
+ * @param opts determiens text and language
+ * @returns function that speaks the configured text when called
+ */
 function speakFn(opts: TtsOptsBuilt): () => void {
+  if (typeof window.speechSynthesis === 'undefined') {
+    throw new Error('speechSynthesis not found, cannot initialize TTS player')
+  }
+
   const voice = chooseVoice(opts)
   return () => {
     const utterance = new SpeechSynthesisUtterance(opts.text)
@@ -141,6 +116,7 @@ function speakFn(opts: TtsOptsBuilt): () => void {
       speechSynthesis.cancel()
     }
     speechSynthesis.speak(utterance)
+    debug.trace("spoken on web")
   }
 }
 
@@ -163,16 +139,16 @@ function chooseVoice(opts: TtsOptsBuilt): SpeechSynthesisVoice|null {
   return null
 }
 
-function intoElement(something: string|HTMLElement): HTMLElement {
+function intoElement(something: string|Element): Element {
   if (typeof something === "string") {
     const el = document.getElementById(something)
     if (el == null) {
-      throw new Error(`ID or HTMLElement expected, but #${something} not found`)
+      throw new Error(`ID or Element expected, but #${something} not found`)
     }
     return el
-  } else if (something instanceof HTMLElement) {
+  } else if (something instanceof Element) {
     return something
   } else {
-    throw new Error(`ID or HTMLElement expected, got ${something}`)
+    throw new Error(`ID or Element expected, got ${something}`)
   }
 }
