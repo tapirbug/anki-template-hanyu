@@ -118,6 +118,7 @@ function initWriter(container: HTMLElement, opts: WriterOpts): WriteReady {
 function animate(write: WriteReady) {
   if (write.writers.length > 0) {
     write.animatedIdx = 0
+    write.animateNextIdx = write.writers.length === 1 ? 0 : 1
     const advance = advanceAnimation(write)
     const first = write.writers[write.animatedIdx]
     first.hanziWriter.animateCharacter({ onComplete: advance })
