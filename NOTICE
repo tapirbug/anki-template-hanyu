@@ -1,0 +1,31 @@
+anki-template-hanyu
+Copyright (c) 2023–Present Philipp Stadler
+
+-------------------------------------------------------------------------------
+
+This product includes software from the FiraCode project (SIL Open Font License 1.1).
+Author: Nikita Prokopov @nikitonsky
+https://github.com/tonsky/FiraCode
+
+This product includes software from the hanzi-writer project (MIT).
+Copyright (c) 2014 David Chanin.
+https://github.com/chanind/hanzi-writer
+
+-------------------------------------------------------------------------------
+
+This project also would not have been possible without these projects and the
+teams behind them:
+* Anki (https://apps.ankiweb.net/)
+* parcel (https://parceljs.org/)
+
+-------------------------------------------------------------------------------
+
+COPYING notice from the hanzi-writer project:
+
+Hanzi Writer uses data from the excellent Make Me a Hanzi project and fonts from Arphic. You can redistribute and/or modify the font data under the terms of the Arphic Public License as published by Arphic Technology Co., Ltd. You should have received a copy of this license (the directory "APL") in the data folder of this repository; if not, see http://ftp.gnu.org/non-gnu/chinese-fonts-truetype/LICENSE.
+
+Arphic PL KaitiM GB and UKai Copyright 1999 Arphic Technology Co., Ltd.; licensed under the Arphic Public License http://www.arphic.com.tw/en/home/index
+
+Make Me a Hanzi Copyright 1999 Arphic Technology Co., Ltd., copyright 2016 Shaunak Kishore; licensed under the Arphic Public License https://github.com/skishore/makemeahanzi
+
+-------------------------------------------------------------------------------

@@ -36,6 +36,6 @@
   "scripts": {
     "dev": "parcel serve",
     "clean": "rm -rf anki-template-hanyu-$npm_package_version *.build-in-progress",
-    "build": "yarn run clean && parcel build --no-source-maps --dist-dir=anki-template-hanyu-$npm_package_version.build-in-progress && mv anki-template-hanyu-$npm_package_version.build-in-progress anki-template-hanyu-$npm_package_version"
+    "build": "yarn run clean && parcel build --no-source-maps --dist-dir=anki-template-hanyu-$npm_package_version.build-in-progress && cp LICENSE NOTICE anki-template-hanyu-$npm_package_version.build-in-progress && mv anki-template-hanyu-$npm_package_version.build-in-progress anki-template-hanyu-$npm_package_version"
   }
 }
