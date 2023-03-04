@@ -12,13 +12,16 @@ export function init(): void {
   if (!isOnPlatform(Platform.AnkiDroid, Platform.Desktop)) {
     debug.trace("start initializing tts")
     for (const playerContainer of document.getElementsByClassName(ttsPlayerClass)) {
-      const text = playerContainer.textContent?.trim()
-      if (text) {
-        createTts({
-          addTo: playerContainer,
-          text,
-          lang: languages
-        })
+      if (!playerContainer.classList.contains('is-initialized')) {
+        const text = playerContainer.textContent?.trim()
+        if (text) {
+          createTts({
+            addTo: playerContainer,
+            text,
+            lang: languages
+          })
+        }
+        playerContainer.classList.add('is-initialized')
       }
     }
     debug.trace("done initializing tts")
