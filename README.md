@@ -7,9 +7,9 @@ Easiest to get started is to download the template from the
 [Releases](https://github.com/tapirbug/anki-template-hanyu/releases) section
 on the GitHub repo. You can also follow the steps in _Building_ if you want to
 customize the template instead or want to build yourself for some other reason.
-Either way, you will end up with a directory like `anki-template-hanyu-0.0.2`,
-with one sub-directory for each type of template. `index.html` is not necessary
-for use with Anki, only for testing.
+Either way, you will end up with a directory like `anki-template-hanyu-1.2.3`,
+with a `template` directory in it, in turn containing one sub-directory for
+each type of template.
 
 To use a template in Anki you will need to copy the contents of the contained
 `front.html` and `back.html` into Anki. Styles are embedded into the HTML
@@ -22,6 +22,9 @@ fields:
 * `Deutsch`,
 * `汉字` (chinese characters to learn, also used for text-to-speech),
 * `Pīnyīn`.
+
+`index.html` is not necessary for use with Anki, just for previewing in your
+browser.
 
 That's it, you are good to go and can start adding notes!
 
@@ -54,11 +57,13 @@ manually you should end up with pretty much the same result:
 1. run `yarn run parcel build`
 2. rename `dist` to something nice like `anki-template-hanyu`
 
-One way or te other you are going to find several sub-directories with
-templates for various types of cards and a single `index.html` (for overview).
+One way or the other you are going to find a `templates` directory in your
+build, with several sub-directories for each type of templates with
+`front.html`/`back.html` in it. You can copy/paste `front.html`/`back.html`
+contents into your Anki cards as outlined above.
 
-You can copy/paste `front.html`/`back.html` contents into your Anki cards as
-outlined above.
+There is also a single `index.html` for overview next to the templates
+directory.
 
 ## Contributing
 Feel free to raise a Github issue if you have any suggestions or even pull
