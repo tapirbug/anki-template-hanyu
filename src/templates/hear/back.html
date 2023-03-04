@@ -24,50 +24,40 @@
     {{Pīnyīn}}
   </dd>
   <dt>
-    汉语
+    Deutsch
   </dt>
-  <dd id="t2s-player-container" class="t2s-player-container">
-    <div class="anki-droid-player">
-      <tts style="display: none" service="android" voice="zh_CN">
-        {{text:汉字}}
-      </tts>
-    </div>
-    <div class="anki-web-player">
-      {{text:汉字}}
-    </div>
-    <div class="anki-builtin-player">
-      {{tts zh_CN:汉字}}
-    </div>
+  <dd>
+    {{Deutsch}}
   </dd>
 </dl>
 
 <script type="module">
   if (process.env.NODE_ENV !== 'production') {
     const pattern = "{{FrontSide}}"
-    import('bundle-text:./front.html')
-      .then(html => {
-        for (child of document.body.childNodes) {
+    Promise.all([
+      import('../../components/tts/init'),
+      import('bundle-text:./front.html')
+    ]).then(([ { init }, html ]) => {
+      for (child of document.body.childNodes) {
           const text = child.textContent
           const patternIdx = text.indexOf(pattern)
           if (patternIdx >= 0) {
-            // resolve first {{FrontSide}} (just for dev), which also includes the CSS/KS
+            // resolve first {{FrontSide}} (just for dev), which also includes the CSS
             const front = document.createElement('div')
             front.innerHTML = html
             const beforeDirective = document.createTextNode(text.substring(0, patternIdx))
             const afterDirective = document.createTextNode(text.substring(patternIdx + pattern.length))
             child.replaceWith(beforeDirective, front, afterDirective)
+            // also initialize the TTS from the front (not sure why the script does not kick in)
+            init()
             return // stop after first
           }
         }
-      })
+    })
   }
 </script>
 
 <script type="module">
-  import { init } from '../components/write/init'
-  init()
-</script>
-<script type="module">
-  import { init } from '../components/tts/init'
+  import { init } from '../../components/write/init'
   init()
 </script>

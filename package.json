@@ -15,16 +15,16 @@
   },
   "source": [
     "src/index.html",
-    "src/hear/front.html",
-    "src/hear/back.html",
-    "src/read_hanzi/front.html",
-    "src/read_hanzi/back.html",
-    "src/read_pinyin/front.html",
-    "src/read_pinyin/back.html",
-    "src/speak/front.html",
-    "src/speak/back.html",
-    "src/write/front.html",
-    "src/write/back.html"
+    "src/templates/hear/front.html",
+    "src/templates/hear/back.html",
+    "src/templates/read_hanzi/front.html",
+    "src/templates/read_hanzi/back.html",
+    "src/templates/read_pinyin/front.html",
+    "src/templates/read_pinyin/back.html",
+    "src/templates/speak/front.html",
+    "src/templates/speak/back.html",
+    "src/templates/write/front.html",
+    "src/templates/write/back.html"
   ],
   "targets": {
     "default": {
