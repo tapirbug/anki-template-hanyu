@@ -1,3 +1,6 @@
+window.onerror = (evtOrMsgString, source, lineNo) =>
+  error(`Error: "${evtOrMsgString.toString()}" at ${source}:${lineNo}`)
+
 export function trace(text: string): void {
   log(Level.Trace, text)
 }
