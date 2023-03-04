@@ -1,6 +1,6 @@
 {
   "name": "anki-template-hanyu",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Anki template for learning to write, speak and understand Mandarin Chinese",
   "repository": "https://github.com/tapirbug/anki-template-hanyu",
   "author": "Philipp Stadler <hello@phstadler.com>",
@@ -33,6 +33,9 @@
     }
   },
   "browserslist": "Chrome < 21",
+  "@parcel/bundler-default": {
+    "minBundles": 10000
+  },
   "scripts": {
     "dev": "parcel serve",
     "clean": "rm -rf anki-template-hanyu-$npm_package_version *.build-in-progress",
