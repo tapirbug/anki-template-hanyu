@@ -2,29 +2,30 @@
   @import url(../../components/global.css);
 </style>
 
-<aside class="exercise-kind">
-  {{Card}}
-</aside>
+<div class="exercise front">
+  <aside class="exercise-kind">
+    {{Card}}
+  </aside>
 
-<dl class="translations">
-  <dt>
-    汉语
-  </dt>
-  <dd id="t2s-player-container" class="t2s-player-container">
-    <div class="anki-droid-player">
-      <tts style="display: none" service="android" voice="zh_CN">
+  <dl class="translations">
+    <dt>
+      汉语
+    </dt>
+    <dd id="t2s-player-container" class="t2s-player-container">
+      <div class="anki-droid-player">
+        <tts style="display: none" service="android" voice="zh_CN">
+          {{text:汉字}}
+        </tts>
+      </div>
+      <div class="anki-web-player">
         {{text:汉字}}
-      </tts>
-    </div>
-    <div class="anki-web-player">
-      {{text:汉字}}
-    </div>
-    <div class="anki-builtin-player">
-      {{tts zh_CN:汉字}}
-    </div>
-  </dd>
-  
-</dl>
+      </div>
+      <div class="anki-builtin-player">
+        {{tts zh_CN:汉字}}
+      </div>
+    </dd>
+  </dl>
+</div>
 
 <script type="module">
   import { init } from '../../components/tts/init'

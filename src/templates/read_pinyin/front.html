@@ -2,18 +2,20 @@
   @import url(../../components/global.css);
 </style>
 
-<aside class="exercise-kind">
-  {{Card}}
-</aside>
+<div class="exercise front">
+  <aside class="exercise-kind">
+    {{Card}}
+  </aside>
 
-<dl class="translations">
-  <dt>
-    Pīnyīn
-  </dt>
-  <dd>
-    {{Pīnyīn}}
-  </dd>
-</dl>
+  <dl class="translations">
+    <dt>
+      Pīnyīn
+    </dt>
+    <dd>
+      {{Pīnyīn}}
+    </dd>
+  </dl>
+</div>
 
 <!-- Suppress speech output on AnkiDroid until card flipped -->
 <tts style="display: none" service="android" voice="zh_CN"></tts>

@@ -1,12 +1,12 @@
 @import url(./debug/debug.css);
 @import url(./tts/tts.css);
 
-.card {
-  font-family: "Fira Sans", arial;
-  font-size: 20px;
+.exercise {
+  font-family: "Fira Sans", sans-serif;
   text-align: center;
   color: black;
   background-color: white;
+  font-size: 1.2em;
  }
  
  .exercise-kind {
