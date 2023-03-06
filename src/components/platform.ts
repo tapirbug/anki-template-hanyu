@@ -5,19 +5,12 @@ export enum Platform {
 }
 
 export function isOnPlatform(...anyOfPlatforms: Platform[]): boolean {
-  const htmlClasses = document.body.parentElement?.classList
-  if (!htmlClasses) {
-    throw new Error('no classlist support, cannot detect platform')
-  }
   const actualPlatform = detectPlatform()
   return anyOfPlatforms.some(p => p === actualPlatform)
 }
 
 function detectPlatform(): Platform {
-  const htmlClasses = document.body.parentElement?.classList
-  if (!htmlClasses) {
-    throw new Error('no classlist support, cannot detect platform')
-  }
+  const htmlClasses = document.documentElement.classList
   if (htmlClasses.contains('linux') && !htmlClasses.contains('android')
       || htmlClasses.contains('win')
       || htmlClasses.contains('max')) {
