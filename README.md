@@ -34,18 +34,32 @@ Read this section if you want to make a customized version of the template,
 e.g. to change the name of the fields to match your pre-existing notes, or if
 you want to add entirely new features.
 
-Once you have checked out the repo, make sure that you have node.js, yarn,
-python and pip installed and run a dev server at https://localhost:1234/
+### Prerequesites
+Make sure that you have node.js, yarn installed.
+
+python and pip are also recommended if you want to create an apkg package with
+your build to import into Anki.
+
+Install the `anki` python package for the build script:
+
+    pip install anki
+
+Then, check out the repo:
 
     git clone git@github.com:tapirbug/anki-template-hanyu.git
     cd anki-template-hanyu
-    yarn run parcel serve
+
+### Applying Changes
+Run a dev server at https://localhost:1234/:
+    
+    yarn dev
 
 If you are seeing a collection of links to the various templates at
 https://localhost:1234/, it worked. You can modify the templates by playing
 with the HTML, CSS and JS files in the `src` directory. Any changes should be
 visible without refreshing your tab during development.
 
+### Building HTML and apkg
 When you are happy with your changes, run:
 
     yarn build
