@@ -4,3 +4,4 @@ dist
 anki-template-hanyu-*
 .parcel-cache
 yarn-error.log
+__pycache__
