@@ -10,7 +10,7 @@ templates = [
     # if this key phrase is found on the front template
     "anki-template-hanyu-speak",
     # then use front.html and back.html in this directory for the card type
-    "templates/speak",
+    "templates/molaoshi/speak",
     # and for skeleton apkg use this front HTML
     "anki-template-hanyu-speak-front {{Deutsch}}",
     # and this back HTML
@@ -18,25 +18,25 @@ templates = [
   ),
   (
     "anki-template-hanyu-write",
-    "templates/write",
+    "templates/molaoshi/write",
     "anki-template-hanyu-write-front {{Deutsch}}",
     "anki-template-hanyu-write-back {{汉字}}"
   ),
   (
     "anki-template-hanyu-read-hanzi",
-    "templates/read_hanzi",
+    "templates/molaoshi/read_hanzi",
     "anki-template-hanyu-read-hanzi-front {{汉字}}",
     "anki-template-hanyu-read-hanzi-back {{Deutsch}}"
   ),
   (
     "anki-template-hanyu-read-pinyin",
-    "templates/read_pinyin",
+    "templates/molaoshi/read_pinyin",
     "anki-template-hanyu-read-pinyin-front {{Pīnyīn}}",
     "anki-template-hanyu-read-pinyin-back {{Deutsch}}"
   ),
   (
     "anki-template-hanyu-hear",
-    "templates/hear",
+    "templates/molaoshi/hear",
     "anki-template-hanyu-hear-front {{汉字}}",
     "anki-template-hanyu-hear-back {{Deutsch}}"
   ),

@@ -16,16 +16,16 @@
   },
   "source": [
     "src/index.html",
-    "src/templates/hear/front.html",
-    "src/templates/hear/back.html",
-    "src/templates/read_hanzi/front.html",
-    "src/templates/read_hanzi/back.html",
-    "src/templates/read_pinyin/front.html",
-    "src/templates/read_pinyin/back.html",
-    "src/templates/speak/front.html",
-    "src/templates/speak/back.html",
-    "src/templates/write/front.html",
-    "src/templates/write/back.html"
+    "src/templates/molaoshi/hear/front.html",
+    "src/templates/molaoshi/hear/back.html",
+    "src/templates/molaoshi/read_hanzi/front.html",
+    "src/templates/molaoshi/read_hanzi/back.html",
+    "src/templates/molaoshi/read_pinyin/front.html",
+    "src/templates/molaoshi/read_pinyin/back.html",
+    "src/templates/molaoshi/speak/front.html",
+    "src/templates/molaoshi/speak/back.html",
+    "src/templates/molaoshi/write/front.html",
+    "src/templates/molaoshi/write/back.html"
   ],
   "targets": {
     "default": {

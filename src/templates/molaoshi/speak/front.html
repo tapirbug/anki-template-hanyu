@@ -1,28 +1,18 @@
 <style>
-  @import url(../../components/global.css);
+  @import url(../../../components/global.css);
 </style>
 
-<div class="exercise front anki-template-hanyu-hear-front">
+<div class="exercise front anki-template-hanyu-speak-front">
   <aside class="exercise-kind">
     {{Card}}
   </aside>
 
   <dl class="translations">
     <dt>
-      汉语
+      Deutsch
     </dt>
-    <dd id="t2s-player-container" class="t2s-player-container">
-      <div class="anki-droid-player">
-        <tts style="display: none" service="android" voice="zh_CN">
-          {{text:汉字}}
-        </tts>
-      </div>
-      <div class="anki-web-player">
-        {{text:汉字}}
-      </div>
-      <div class="anki-builtin-player">
-        {{tts zh_CN:汉字}}
-      </div>
+    <dd>
+      {{Deutsch}}
     </dd>
   </dl>
 
@@ -51,7 +41,5 @@
   </details>
 </div>
 
-<script type="module">
-  import { init } from '../../components/tts/init'
-  init()
-</script>
+<!-- Suppress speech output on AnkiDroid until card flipped -->
+<tts style="display: none" service="android" voice="zh_CN"></tts>
