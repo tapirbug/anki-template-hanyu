@@ -1,0 +1,32 @@
+<style>
+  @import url(../../../components/global.css);
+</style>
+
+<div class="exercise front hanzi-read-front">
+  <aside class="exercise-kind">
+    {{Card}}
+  </aside>
+
+  <dl class="translations">
+    <dt>
+      汉字
+    </dt>
+    <dd>
+      {{汉字}}
+    </dd>
+    <dt>
+      Strichfolge
+    </dt>
+    <dd>
+      <div id="strichfolge-animation" class="strichfolge-animation">
+        {{text:汉字}}
+      </div>
+    </dd>
+  </dl>
+</div>
+
+<script type="module">
+  import '../../../components/debug'
+  import { init } from '../../../components/write/init'
+  init()
+</script>

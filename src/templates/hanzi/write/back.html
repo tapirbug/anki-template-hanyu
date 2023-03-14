@@ -1,0 +1,40 @@
+<div class="exercise back hanzi-write-back">
+  {{FrontSide}}
+
+  <hr id=answer>
+
+  <dl class="translations">
+    <dt>
+      汉字
+    </dt>
+    <dd>
+      {{汉字}}
+    </dd>
+    <dt>
+      Strichfolge
+    </dt>
+    <dd>
+      <div id="strichfolge-animation" class="strichfolge-animation">
+        {{text:汉字}}
+      </div>
+    </dd>
+    <dt>
+      Story
+    </dt>
+    <dd>
+      {{Story}}
+    </dd>
+    <dt>
+      Primitive meanings
+    </dt>
+    <dd>
+      {{Primitive}}
+    </dd>
+  </dl>
+</div>
+
+<script type="module">
+  import '../../../components/debug'
+  import { init } from '../../../components/write/init'
+  init()
+</script>
