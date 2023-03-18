@@ -36,7 +36,11 @@ export function renderAnkiTagsInElement (element: Element): void {
  * array would mean that the text consisted only of anki tags and all resulted
  * in empty content, so that the node with the given text should be deleted.
  */
-function renderTextNode (rendered: Node[] | null, text: string, fromIdx: number): Node[] | null {
+function renderTextNode (
+  rendered: Node[] | null,
+  text: string,
+  fromIdx: number
+): Node[] | null {
   const tagStart = text.indexOf('{{', fromIdx)
   if (tagStart > 0) {
     // tag found
@@ -47,7 +51,9 @@ function renderTextNode (rendered: Node[] | null, text: string, fromIdx: number)
     }
 
     const tagContent = text.substring(tagContentStart, tagEnd)
-    const tagNameEndExcl = !tagContent.includes(' ') ? tagContent.length : tagContent.indexOf(' ')
+    const tagNameEndExcl = !tagContent.includes(' ')
+      ? tagContent.length
+      : tagContent.indexOf(' ')
     const tagName = tagContent.substring(0, tagNameEndExcl)
     // ignore the tag arguments for now
 
@@ -61,7 +67,8 @@ function renderTextNode (rendered: Node[] | null, text: string, fromIdx: number)
     // then the rendered content for the anki directive
     rendered.push(renderTag(tagName))
 
-    // and then render the rest, which could contain more nodes or just text (or nothing)
+    // and then render the rest, which could contain more nodes
+    // or just text (or nothing)
     rendered = renderTextNode(rendered, text, tagEnd + '}}'.length)
   } else if (fromIdx < text.length) {
     // no more tags found, append trailing text to already rendered content
