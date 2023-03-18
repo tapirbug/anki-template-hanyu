@@ -10,7 +10,9 @@ import * as initTts from '../tts/init'
  * has no effect.
  */
 export function renderAnkiTagsInElement (element: Element): void {
-  for (const child of element.childNodes) {
+  const children = element.childNodes
+  for (let i = 0; i < children.length; ++i) {
+    const child = children[i]
     if (child.nodeType === Node.ELEMENT_NODE) {
       const element = child as Element
       if (element.tagName !== 'SCRIPT') {
