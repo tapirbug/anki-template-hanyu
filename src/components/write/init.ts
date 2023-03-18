@@ -9,8 +9,8 @@ export function init (): void {
   for (let i = 0; i < writerContainers.length; ++i) {
     const writerContainer = writerContainers[i]
     if (!writerContainer.classList.contains('is-initialized')) {
-      const text = writerContainer.textContent?.trim()
-      if (text) {
+      const text = (writerContainer.textContent ?? '').trim()
+      if (text.length > 0) {
         createWriter({
           addTo: writerContainer,
           text
