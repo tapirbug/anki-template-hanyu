@@ -1,13 +1,30 @@
-.notice-open-btn-text {
+.notice-btn-open-text,
+.notice-btn-close-text {
   display: inline-block;
-  font-size: 0.4em;
+  font-size: 0.6em;
   font-weight: 700;
   border: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: 0.3em;
   padding: 0.1em 0.4em;
 }
 
-.notice-open-btn {
+.notice-btn-open-text {
+  display: inline;
+}
+
+.notice-btn-close-text {
+  display: none;
+}
+
+details[open] .notice-btn-open-text {
+  display: none;
+}
+
+details[open] .notice-btn-close-text {
+  display: inline;
+}
+
+.notice-btn {
   text-align: center;
   cursor: pointer;
 }
