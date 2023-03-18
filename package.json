@@ -12,8 +12,16 @@
     "@parcel/optimizer-data-url": "2.8.3",
     "@parcel/transformer-inline-string": "2.8.3",
     "@types/node": "^18.14.6",
+    "@typescript-eslint/eslint-plugin": "^5.43.0",
+    "@typescript-eslint/parser": "^5.55.0",
+    "eslint": "^8.0.1",
+    "eslint-config-standard-with-typescript": "^34.0.1",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-n": "^15.0.0",
+    "eslint-plugin-promise": "^6.0.0",
     "parcel": "^2.8.3",
-    "posthtml-include": "^1.7.4"
+    "posthtml-include": "^1.7.4",
+    "typescript": "*"
   },
   "source": [
     "src/index.html",
@@ -43,6 +51,7 @@
     "minBundles": 10000
   },
   "scripts": {
+    "lint": "eslint --ext .ts src",
     "dev": "parcel serve",
     "clean": "rm -rf anki-template-hanyu-$npm_package_version *.build-in-progress",
     "build": "yarn run clean && parcel build --no-source-maps --dist-dir=anki-template-hanyu-$npm_package_version.build-in-progress && cp LICENSE NOTICE anki-template-hanyu-$npm_package_version.build-in-progress && build/apkg.py src/skeleton.apkg anki-template-hanyu-$npm_package_version.build-in-progress hanyu-$npm_package_version && mv anki-template-hanyu-$npm_package_version.build-in-progress anki-template-hanyu-$npm_package_version"
