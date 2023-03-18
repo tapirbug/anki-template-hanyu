@@ -11,10 +11,12 @@ const languages = ['cmn', 'zh-cn', 'zh_cn', 'zh']
 export function init (): void {
   if (!isOnPlatform(Platform.AnkiDroid, Platform.Desktop)) {
     debug.trace('start initializing tts')
-    for (const playerContainer of document.getElementsByClassName(ttsPlayerClass)) {
+    const playerContainers = document.getElementsByClassName(ttsPlayerClass)
+    for (let i = 0; i < playerContainers.length; ++i) {
+      const playerContainer = playerContainers[i]
       if (!playerContainer.classList.contains('is-initialized')) {
-        const text = playerContainer.textContent?.trim()
-        if (text) {
+        const text = (playerContainer.textContent ?? '').trim()
+        if (text.length > 0) {
           createTts({
             addTo: playerContainer,
             text,
