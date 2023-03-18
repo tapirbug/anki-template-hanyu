@@ -44,7 +44,9 @@ export function createWriter (opts: WriterOpts): void {
   }
   const oldWriteState = getState()
   if (isWriteError(oldWriteState)) {
-    container.replaceChildren(`Previous error, not trying again: ${oldWriteState.msg}`)
+    container.replaceChildren(
+      `Previous error, not trying again: ${oldWriteState.msg}`
+    )
     return
   }
   try {
@@ -56,10 +58,13 @@ export function createWriter (opts: WriterOpts): void {
       })
     }
     window[globalId] = write
-  } catch (error) {
+  } catch (error: any) {
+    const msg = error instanceof Error
+      ? error.toString()
+      : JSON.stringify(error)
     const writeError: WriteError = {
       state: State.Error,
-      msg: `${error}`
+      msg
     }
     window[globalId] = writeError
     container.replaceChildren(`Error: ${writeError.msg}`)
@@ -68,7 +73,7 @@ export function createWriter (opts: WriterOpts): void {
 
 function getState (): Write {
   const existingWriteState: any = window[globalId]
-  if (existingWriteState && isWrite(existingWriteState)) {
+  if (isWrite(existingWriteState)) {
     return existingWriteState
   }
   const newWriteState = { state: State.Loading }
@@ -117,33 +122,36 @@ function initWriter (container: Element, opts: WriterOpts): WriteReady {
   }
 }
 
-function animate (write: WriteReady) {
+function animate (write: WriteReady): void {
   if (write.writers.length > 0) {
     write.animatedIdx = 0
     write.animateNextIdx = write.writers.length === 1 ? 0 : 1
     const advance = advanceAnimation(write)
     const first = write.writers[write.animatedIdx]
-    first.hanziWriter.animateCharacter({ onComplete: advance })
+    void first.hanziWriter.animateCharacter({ onComplete: advance })
   }
 }
 
 function advanceAnimation (write: WriteReady): () => void {
-  const advance = () => {
+  const advance: () => void = () => {
     write.animatedIdx = write.animateNextIdx
     write.animateNextIdx = (write.animatedIdx + 1) % write.writers.length
     const newWriter = write.writers[write.animatedIdx]
-    newWriter.hanziWriter.animateCharacter({ onComplete: advance })
+    void newWriter.hanziWriter.animateCharacter({ onComplete: advance })
   }
   return advance
 }
 
-function continueAnimationWith (write: WriteReady, continueWith: Writer) {
+function continueAnimationWith (
+  write: WriteReady,
+  continueWith: Writer
+): void {
   const { writers, animatedIdx } = write
   const currentWriter = writers[animatedIdx]
   write.animateNextIdx = writers.indexOf(continueWith)
   // reset all current animations, which also triggers the callback
   // to advance the animation to the newly set next index
-  currentWriter.hanziWriter.setCharacter(currentWriter.character)
+  void currentWriter.hanziWriter.setCharacter(currentWriter.character)
 }
 
 /// Replaces commas with chinese commas and some other gimmicks, then returns
@@ -165,10 +173,10 @@ function splitIntoDrawableChars (text: string): string[] {
 }
 
 function isWrite (writer: any): writer is WriteError {
-  return 'state' in writer &&
+  return typeof writer === 'object' && 'state' in writer &&
     (writer.state === State.Error ||
       writer.state === State.Loading ||
-      writer.state == State.Ready)
+      writer.state === State.Ready)
 }
 
 function isWriteError (writer: Write): writer is WriteError {
