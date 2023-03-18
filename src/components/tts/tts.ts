@@ -47,7 +47,7 @@ const defaultOpts: TtsOptsWithDefaults = {
   lang: []
 }
 
-export function createTts (requestedOpts: TtsOpts) {
+export function createTts (requestedOpts: TtsOpts): void {
   const opts = buildOpts(requestedOpts)
   const container = intoElement(opts.addTo)
   const speak = speakFn(opts)
@@ -73,16 +73,28 @@ function buildOpts (given: TtsOpts): TtsOptsBuilt {
   // these type checks are not really necessary, but cannot hurt since the
   // options might originate from unchecked JS
   if (typeof opts.text !== 'string') {
-    throw new Error(`Invalid text to speak, must specify a string: ${given.addTo}`)
+    throw new Error(
+      'Invalid text to speak, must specify a string: ' +
+      JSON.stringify(given.addTo)
+    )
   }
   if (typeof opts.addTo !== 'string' && !(given.addTo instanceof Element)) {
-    throw new Error(`Invalid addTo, set to Element or string or leave out: ${given.addTo}`)
+    throw new Error(
+      'Invalid addTo, set to Element or string or leave out: ' +
+      JSON.stringify(given.addTo)
+    )
   }
   if (typeof opts.lang !== 'string' && !Array.isArray(given.lang)) {
-    throw new Error(`Invalid lang, set to array or string or leave out: ${given.lang}`)
+    throw new Error(
+      'Invalid lang, set to array or string or leave out: ' +
+      JSON.stringify(given.lang)
+    )
   }
   if (typeof opts.autoplay !== 'boolean') {
-    throw new Error(`Invalid autoplay, set to boolean or leave out: ${given.autoplay}`)
+    throw new Error(
+      'Invalid autoplay, set to boolean or leave out: ' +
+      JSON.stringify(given.autoplay)
+    )
   }
   return opts
 }
@@ -124,10 +136,8 @@ function chooseVoice (opts: TtsOptsBuilt): SpeechSynthesisVoice | null {
   let langs: string[]
   if (Array.isArray(opts.lang)) {
     langs = opts.lang.map(lang => lang.toLowerCase())
-  } else if (typeof opts.lang === 'string') {
-    langs = [opts.lang.toLowerCase()]
   } else {
-    throw new Error(`Tried to choose a voice but cannot choose voice with illegal parameter ${opts.lang}`)
+    langs = [opts.lang.toLowerCase()]
   }
   for (const lang of langs) {
     const voice = speechSynthesis.getVoices()
@@ -146,9 +156,7 @@ function intoElement (something: string | Element): Element {
       throw new Error(`ID or Element expected, but #${something} not found`)
     }
     return el
-  } else if (something instanceof Element) {
-    return something
   } else {
-    throw new Error(`ID or Element expected, got ${something}`)
+    return something
   }
 }
