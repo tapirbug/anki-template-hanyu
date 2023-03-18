@@ -1,12 +1,12 @@
-export function trace(text: string): void {
+export function trace (text: string): void {
   log(Level.Trace, text)
 }
 
-export function info(text: string): void {
+export function info (text: string): void {
   log(Level.Info, text)
 }
 
-export function error(text: string): void {
+export function error (text: string): void {
   log(Level.Error, text)
 }
 
@@ -16,7 +16,7 @@ const enum Level {
   Error = 'error'
 }
 
-function log(level: Level, text: string): void {
+function log (level: Level, text: string): void {
   if (process.env.NODE_ENV !== 'production') {
     // in dev mode log to the console
     if (level === Level.Error) {
@@ -34,10 +34,10 @@ function log(level: Level, text: string): void {
   }
 }
 
-function getOrCreateDebugContainer(): HTMLElement {
+function getOrCreateDebugContainer (): HTMLElement {
   const debugContainerId = 'debug-container'
   let container = document.getElementById(debugContainerId)
-  if (!container) {
+  if (container == null) {
     container = document.createElement('div')
     container.id = debugContainerId
     document.body.appendChild(container)

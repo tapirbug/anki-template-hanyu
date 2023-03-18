@@ -19,18 +19,18 @@ export interface TtsOptsWithDefaults {
    * substring, e.g. specifing `"zh"` will accept any chinese voice. Can also
    * prefer multiple languages in order of preference, e.g. `["zh-CN", "zh"]`
    * would indicate that `zh-CN` is preferred, but any chinese voice will do.
-   * 
+   *
    * Leaving out the property or setting it to an empty array will choose the
    * default voice instead.
    */
-  lang: string|string[]
+  lang: string | string[]
   /** Default: true */
   autoplay: boolean
 }
 
 /**
  * The options specified by the user to specify how to create the TTS player.
- * 
+ *
  * Anything that has a default can be left out.
  */
 export type TtsOpts = TtsOptsMandatory & Partial<TtsOptsWithDefaults>
@@ -41,16 +41,16 @@ export type TtsOpts = TtsOptsMandatory & Partial<TtsOptsWithDefaults>
  */
 type TtsOptsBuilt = TtsOptsMandatory & TtsOptsWithDefaults
 
-const defaultOpts : TtsOptsWithDefaults = {
+const defaultOpts: TtsOptsWithDefaults = {
   addTo: document.body,
   autoplay: true,
   lang: []
 }
 
-export function createTts(requestedOpts: TtsOpts) {
+export function createTts (requestedOpts: TtsOpts) {
   const opts = buildOpts(requestedOpts)
   const container = intoElement(opts.addTo)
-  const speak = speakFn(opts);
+  const speak = speakFn(opts)
   const player = renderPlayer(opts, speak)
   // clear any elements or text previously in there
   container.replaceChildren()
@@ -64,11 +64,11 @@ export function createTts(requestedOpts: TtsOpts) {
  * Builds the effective options to use to build the player, derived from a
  * number of inputs, in reverse order of preference, e.g. first the defaults
  * and then the user options.
- * 
+ *
  * If the final options are missing a property or if it has the wrong type,
  * throws an error.
  */
-function buildOpts(given: TtsOpts): TtsOptsBuilt {
+function buildOpts (given: TtsOpts): TtsOptsBuilt {
   const opts = Object.assign({}, defaultOpts, given)
   // these type checks are not really necessary, but cannot hurt since the
   // options might originate from unchecked JS
@@ -87,7 +87,7 @@ function buildOpts(given: TtsOpts): TtsOptsBuilt {
   return opts
 }
 
-function renderPlayer(opts: TtsOptsBuilt, speak: () => void): Element {
+function renderPlayer (opts: TtsOptsBuilt, speak: () => void): Element {
   const player = document.createElement('button')
   player.innerText = '▶'
   player.addEventListener('click', speak)
@@ -97,11 +97,11 @@ function renderPlayer(opts: TtsOptsBuilt, speak: () => void): Element {
 /**
  * Creates a function that uses the speechSynthesis browser API to speak the
  * text specified with the opts.
- * 
+ *
  * @param opts determiens text and language
  * @returns function that speaks the configured text when called
  */
-function speakFn(opts: TtsOptsBuilt): () => void {
+function speakFn (opts: TtsOptsBuilt): () => void {
   if (typeof window.speechSynthesis === 'undefined') {
     throw new Error('speechSynthesis not found, cannot initialize TTS player')
   }
@@ -109,38 +109,38 @@ function speakFn(opts: TtsOptsBuilt): () => void {
   const voice = chooseVoice(opts)
   return () => {
     const utterance = new SpeechSynthesisUtterance(opts.text)
-    if (voice) {
+    if (voice != null) {
       utterance.voice = voice
     } // if preferred language not found, stick to default voice
     if (speechSynthesis.speaking) {
       speechSynthesis.cancel()
     }
     speechSynthesis.speak(utterance)
-    debug.trace("spoken on web")
+    debug.trace('spoken on web')
   }
 }
 
-function chooseVoice(opts: TtsOptsBuilt): SpeechSynthesisVoice|null {
-  let langs : string[]
+function chooseVoice (opts: TtsOptsBuilt): SpeechSynthesisVoice | null {
+  let langs: string[]
   if (Array.isArray(opts.lang)) {
     langs = opts.lang.map(lang => lang.toLowerCase())
-  } else if (typeof opts.lang === "string") {
-    langs = [ opts.lang.toLowerCase() ]
+  } else if (typeof opts.lang === 'string') {
+    langs = [opts.lang.toLowerCase()]
   } else {
     throw new Error(`Tried to choose a voice but cannot choose voice with illegal parameter ${opts.lang}`)
   }
   for (const lang of langs) {
     const voice = speechSynthesis.getVoices()
       .find(voice => voice.lang.toLowerCase().includes(lang))
-    if (voice) {
+    if (voice != null) {
       return voice
     }
   }
   return null
 }
 
-function intoElement(something: string|Element): Element {
-  if (typeof something === "string") {
+function intoElement (something: string | Element): Element {
+  if (typeof something === 'string') {
     const el = document.getElementById(something)
     if (el == null) {
       throw new Error(`ID or Element expected, but #${something} not found`)

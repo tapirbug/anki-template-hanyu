@@ -8,9 +8,9 @@ import { isOnPlatform, Platform } from '../platform'
 const ttsPlayerClass = 'anki-web-player'
 const languages = ['cmn', 'zh-cn', 'zh_cn', 'zh']
 
-export function init(): void {
+export function init (): void {
   if (!isOnPlatform(Platform.AnkiDroid, Platform.Desktop)) {
-    debug.trace("start initializing tts")
+    debug.trace('start initializing tts')
     for (const playerContainer of document.getElementsByClassName(ttsPlayerClass)) {
       if (!playerContainer.classList.contains('is-initialized')) {
         const text = playerContainer.textContent?.trim()
@@ -24,8 +24,8 @@ export function init(): void {
         playerContainer.classList.add('is-initialized')
       }
     }
-    debug.trace("done initializing tts")
+    debug.trace('done initializing tts')
   } else {
-    debug.trace("skipping script-based TTS in favor of native TTS")
+    debug.trace('skipping script-based TTS in favor of native TTS')
   }
 }

@@ -20,14 +20,14 @@ interface WriterOpts {
 }
 
 interface WriteError extends Write {
-  state: State.Error,
+  state: State.Error
   msg: string
 }
 
 interface WriteReady extends Write {
-  state: State.Ready,
-  writers: Writer[],
-  animatedIdx: number,
+  state: State.Ready
+  writers: Writer[]
+  animatedIdx: number
   animateNextIdx: number
 }
 
@@ -37,8 +37,8 @@ interface Writer {
 }
 
 /// Adds a Hanzi writer into the element with the ID defined above.
-export function createWriter(opts: WriterOpts): void {
-  const container = opts.addTo;
+export function createWriter (opts: WriterOpts): void {
+  const container = opts.addTo
   if (!(container instanceof Element)) {
     throw new Error(`Could not find element #${globalId} for the Hanz writer`)
   }
@@ -66,7 +66,7 @@ export function createWriter(opts: WriterOpts): void {
   }
 }
 
-function getState(): Write {
+function getState (): Write {
   const existingWriteState: any = window[globalId]
   if (existingWriteState && isWrite(existingWriteState)) {
     return existingWriteState
@@ -77,7 +77,7 @@ function getState(): Write {
 }
 
 /// Creates the necessary state and DOM elements for the later animations.
-function initWriter(container: Element, opts: WriterOpts): WriteReady {
+function initWriter (container: Element, opts: WriterOpts): WriteReady {
   const nightMode = document.getElementsByClassName('nightMode').length > 0
   const colorBg = nightMode ? '#909090' : '#999999'
   const colorFg = nightMode ? '#FFFFFF' : '#222222'
@@ -95,17 +95,18 @@ function initWriter(container: Element, opts: WriterOpts): WriteReady {
       writers.push({
         character: char,
         hanziWriter: HanziWriter.create(
-        'strichfolge-animation',
-        char,
-        {
-          width: size,
-          height: size,
-          padding: 0,
-          strokeColor: colorFg,
-          outlineColor: colorBg,
-          strokeAnimationSpeed: 1.75
-        }
-      )})
+          'strichfolge-animation',
+          char,
+          {
+            width: size,
+            height: size,
+            padding: 0,
+            strokeColor: colorFg,
+            outlineColor: colorBg,
+            strokeAnimationSpeed: 1.75
+          }
+        )
+      })
     }
   }
   return {
@@ -116,7 +117,7 @@ function initWriter(container: Element, opts: WriterOpts): WriteReady {
   }
 }
 
-function animate(write: WriteReady) {
+function animate (write: WriteReady) {
   if (write.writers.length > 0) {
     write.animatedIdx = 0
     write.animateNextIdx = write.writers.length === 1 ? 0 : 1
@@ -126,7 +127,7 @@ function animate(write: WriteReady) {
   }
 }
 
-function advanceAnimation(write: WriteReady): () => void {
+function advanceAnimation (write: WriteReady): () => void {
   const advance = () => {
     write.animatedIdx = write.animateNextIdx
     write.animateNextIdx = (write.animatedIdx + 1) % write.writers.length
@@ -136,7 +137,7 @@ function advanceAnimation(write: WriteReady): () => void {
   return advance
 }
 
-function continueAnimationWith(write: WriteReady, continueWith: Writer) {
+function continueAnimationWith (write: WriteReady, continueWith: Writer) {
   const { writers, animatedIdx } = write
   const currentWriter = writers[animatedIdx]
   write.animateNextIdx = writers.indexOf(continueWith)
@@ -147,7 +148,7 @@ function continueAnimationWith(write: WriteReady, continueWith: Writer) {
 
 /// Replaces commas with chinese commas and some other gimmicks, then returns
 /// an array of strings for which we want to add hanzi writers
-function splitIntoDrawableChars(text: string): string[] {
+function splitIntoDrawableChars (text: string): string[] {
   const charsAll = text.split('')
   const chars: string[] = []
   for (let charIdx = 0; charIdx < charsAll.length; ++charIdx) {
@@ -163,13 +164,13 @@ function splitIntoDrawableChars(text: string): string[] {
   return chars
 }
 
-function isWrite(writer: any): writer is WriteError {
+function isWrite (writer: any): writer is WriteError {
   return 'state' in writer &&
-    (writer.state === State.Error
-      || writer.state === State.Loading
-      || writer.state == State.Ready)
+    (writer.state === State.Error ||
+      writer.state === State.Loading ||
+      writer.state == State.Ready)
 }
 
-function isWriteError(writer: Write): writer is WriteError {
+function isWriteError (writer: Write): writer is WriteError {
   return writer.state === State.Error
 }

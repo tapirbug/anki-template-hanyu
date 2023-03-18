@@ -3,13 +3,13 @@ import * as initTts from '../tts/init'
 
 /**
  * Replaces anki tags with test data in the given element.
- * 
+ *
  * This function only has an effect in environments other than production, e.g.
  * testing of the template in the browser before changes are tested in Anki.
  * During production, these tags are rendered by Anki itself and this function
  * has no effect.
  */
-export function renderAnkiTagsInElement(element: Element): void {
+export function renderAnkiTagsInElement (element: Element): void {
   for (const child of element.childNodes) {
     if (child.nodeType === Node.ELEMENT_NODE) {
       const element = child as Element
@@ -36,7 +36,7 @@ export function renderAnkiTagsInElement(element: Element): void {
  * array would mean that the text consisted only of anki tags and all resulted
  * in empty content, so that the node with the given text should be deleted.
  */
-function renderTextNode(rendered: Node[] | null, text: string, fromIdx: number): Node[]|null {
+function renderTextNode (rendered: Node[] | null, text: string, fromIdx: number): Node[] | null {
   const tagStart = text.indexOf('{{', fromIdx)
   if (tagStart > 0) {
     // tag found
@@ -47,7 +47,7 @@ function renderTextNode(rendered: Node[] | null, text: string, fromIdx: number):
     }
 
     const tagContent = text.substring(tagContentStart, tagEnd)
-    const tagNameEndExcl = tagContent.indexOf(' ') < 0 ? tagContent.length : tagContent.indexOf(' ')
+    const tagNameEndExcl = !tagContent.includes(' ') ? tagContent.length : tagContent.indexOf(' ')
     const tagName = tagContent.substring(0, tagNameEndExcl)
     // ignore the tag arguments for now
 
@@ -72,7 +72,7 @@ function renderTextNode(rendered: Node[] | null, text: string, fromIdx: number):
   return rendered
 }
 
-function renderTag(name: string): Node {
+function renderTag (name: string): Node {
   if (name === 'FrontSide') {
     const loading = document.createElement('div')
     loading.innerText = 'Loading front side...'
@@ -85,19 +85,19 @@ function renderTag(name: string): Node {
   }
 }
 
-function renderTagOther(name: string): Text {
+function renderTagOther (name: string): Text {
   // for now all other tags render to their name
   return document.createTextNode(name)
 }
 
-function replaceFrontLater(loading: Element): void {
+function replaceFrontLater (loading: Element): void {
   if (loading.ownerDocument.location.pathname.endsWith('front.html')) {
     // avoid loops
     return
   }
 
   const frontUrl = getCorrespondingFrontUrl(window.location)
-  fetch(frontUrl).then(r => r.text()).then(frontHtml => {
+  fetch(frontUrl).then(async r => await r.text()).then(frontHtml => {
     const front = document.createElement('div')
     front.classList.add('front')
     front.innerHTML = frontHtml
@@ -109,7 +109,7 @@ function replaceFrontLater(loading: Element): void {
   }).catch(console.error)
 }
 
-function getCorrespondingFrontUrl(backLocation: Location): URL {
+function getCorrespondingFrontUrl (backLocation: Location): URL {
   const pathComponents = backLocation.pathname.split('/')
   pathComponents.pop()
   pathComponents.push('front.html')
