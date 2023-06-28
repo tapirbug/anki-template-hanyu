@@ -1,6 +1,7 @@
 @import url(./debug/debug.css);
 @import url(./notice/notice.css);
 @import url(./tts/tts.css);
+@import url(./write/write.css);
 
 .exercise {
   font-family: "Fira Sans", sans-serif;

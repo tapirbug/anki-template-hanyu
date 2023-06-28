@@ -1,7 +1,9 @@
 import HanziWriter from 'hanzi-writer'
+import { createStrokes } from './strokes'
+import { colorBg, colorFg } from './colors'
 
 const globalId = 'strichfolge-animation'
-/// Sizes to use for 1 character, 2, 3, and 4 or more.
+/** Sizes to use for 1 character, 2, 3, and 4 or more. */
 const sizes = [160, 100, 60, 50]
 
 const enum State {
@@ -15,7 +17,16 @@ interface Write {
 }
 
 interface WriterOpts {
+  /**
+   * Append the component to the end of this container.
+   */
   addTo: Element
+  /**
+   * Text with chinese characters in it. A Hanzi writer will be created for
+   * each non-ascii character except `，` (full-width comma). Commas of this
+   * kind as well as the standard ASCII comma and spaces will be rendered as
+   * simple text without animation.
+   */
   text: string
 }
 
@@ -49,14 +60,35 @@ export function createWriter (opts: WriterOpts): void {
     )
     return
   }
+  const writerContainer = document.createElement('div')
+  writerContainer.classList.add('writers')
+  const strokesContainer = document.createElement('div')
+  container.append(writerContainer, strokesContainer)
+  const strokeContainers: HTMLDivElement[] = []
   try {
-    const write = initWriter(container, opts)
+    const write = initWriter(writerContainer, opts)
     animate(write)
     for (const writer of write.writers) {
+      const strokeContainer = document.createElement('div')
+      strokeContainer.classList.add('stroke', 'is-inactive')
+      strokeContainers.push(strokeContainer)
+      strokesContainer.appendChild(strokeContainer)
+      createStrokes({ appendTo: strokeContainer, character: writer.character })
       writer.hanziWriter.target.node.addEventListener('click', () => {
+        strokeContainers.forEach(c => {
+          // enable only if currently disabled, otherwise hide all
+          if (c === strokeContainer && !c.classList.contains('is-active')) {
+            c.classList.remove('is-inactive')
+            c.classList.add('is-active')
+          } else {
+            c.classList.remove('is-active')
+            c.classList.add('is-inactive')
+          }
+        })
         continueAnimationWith(write, writer)
       })
     }
+
     window[globalId] = write
   } catch (error: any) {
     const msg = error instanceof Error
@@ -67,7 +99,7 @@ export function createWriter (opts: WriterOpts): void {
       msg
     }
     window[globalId] = writeError
-    container.replaceChildren(`Error: ${writeError.msg}`)
+    writerContainer.replaceChildren(`Error: ${writeError.msg}`)
   }
 }
 
@@ -82,14 +114,10 @@ function getState (): Write {
 }
 
 /// Creates the necessary state and DOM elements for the later animations.
-function initWriter (container: Element, opts: WriterOpts): WriteReady {
-  const nightMode = document.getElementsByClassName('nightMode').length > 0
-  const colorBg = nightMode ? '#909090' : '#999999'
-  const colorFg = nightMode ? '#FFFFFF' : '#222222'
+function initWriter (container: HTMLElement, opts: WriterOpts): WriteReady {
   const chars = splitIntoDrawableChars(opts.text)
   const size = sizes[Math.min(sizes.length - 1, chars.length - 1)]
   const writers: Writer[] = []
-  container.innerHTML = ''
   for (let charIdx = 0; charIdx < chars.length; ++charIdx) {
     const char = chars[charIdx]
     if (char === '，' || char === ',') {
@@ -100,7 +128,7 @@ function initWriter (container: Element, opts: WriterOpts): WriteReady {
       writers.push({
         character: char,
         hanziWriter: HanziWriter.create(
-          'strichfolge-animation',
+          container,
           char,
           {
             width: size,
