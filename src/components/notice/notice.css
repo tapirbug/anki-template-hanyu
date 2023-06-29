@@ -1,11 +1,11 @@
 .notice-btn-open-text,
 .notice-btn-close-text {
   display: inline-block;
-  font-size: 0.6em;
+  font-size: 0.6rem;
   font-weight: 700;
   border: 1px solid rgba(0, 0, 0, 0.12);
-  border-radius: 0.3em;
-  padding: 0.1em 0.4em;
+  border-radius: 0.3rem;
+  padding: 0.1rem 0.4rem;
 }
 
 .notice-btn-open-text {
@@ -30,7 +30,7 @@ details[open] .notice-btn-close-text {
 }
 
 .notice-contents {
-  font-size: 0.5em;
+  font-size: 0.5rem;
 }
 
 .notice-contents ul {
