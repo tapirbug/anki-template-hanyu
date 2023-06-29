@@ -15,7 +15,7 @@ If you like coding, you can also check out this repository and customize the
 template for your own needs. See below for details.
 
 ## Quickstart guide
-If you just want to practice as quick as possible, follow these steps.
+If you just want to practice, follow these steps.
 
 ### Step 1: Download apkg
 Download the latest deck as an _apkg_ file from the
