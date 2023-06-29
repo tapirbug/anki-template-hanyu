@@ -1,4 +1,110 @@
 # 貘老师的汉语
+_English version below_
+
+Hier gibt es Karteikarten für das Lernprogramm _Anki_. Ich verwende sie um
+Mandarin-chinesisch zu lernen. Übersetzungen für chinesische Begriffe sind auf
+_deutsch_.
+
+Es gibt folgende Arten von Karten:
+* Gesprochenes Chinesisch verstehen,
+* Hànzì und Pīnyīn lesen,
+* Hànzì schreiben,
+* deutsche Begriffe auf chinesisch übersetzen.
+
+Die Karteikarten können wie sie sind verwendet werden, oder individuell
+angepasst werden. Zum Beispiel können in Anki neue Vokabeln hinzugefügt werden,
+oder die existierenden Vokabeln können für eine andere Sprache als Deutsch
+angepasst werden. Programmierkenntnisse sind dazu nicht nötig.
+
+Wenn du gerne programmierst, kannst du dieses Repository herunterladen und für
+deine Zwecke anpassen. Mehr Details dazu gibt es weiter unten.
+
+## Installation
+Um einfach nur zu üben, befolge die folgenden Schritte.
+
+### Schritt 1: apkg herunterladen
+Lade die neueste _apkg_-Datei vom GitHub-Repository unter
+[Releases](https://github.com/tapirbug/anki-template-hanyu/releases) auf einen
+PC herunter, z.B. `hanyu-0.9.0.apkg`.
+
+### Schritt 2: Anki Desktop intallieren
+Wenn du Anki noch nicht auf deinem PC installiert hast, lade es von der
+offiziellen [Anki](https://apps.ankiweb.net/#download)-Seite herunter und
+installiere.
+
+### Schritt 3: apkg importieren
+Importiere das _apkg_-Deck in Anki Desktop, z.B. unter _File | Import…_:
+
+![_File | Import…_ dialog in Anki Desktop](docs/screenshots/screenshot-anki-import.png)
+
+![_hanyu-0.9.0.apkg_ in the file open dialog of Anki Desktop](docs/screenshots/screenshot-anki-import-dialog.png)
+
+Damit ist alles erledigt um am PC zu lernen. Probiere es aus!
+
+### Schritt 4: Anki am Smartphone (optional)
+Schön an Anki ist, dass man auch am Smartphone oder anderen Geräten lernen
+kann. Du kannst diesen Schritt überspringen falls du das (noch) nicht brauchst,
+oder du kannst es später erledigen.
+
+Stelle zuerst sicher, dass deine Kartensammlung mit Anki Web synchron ist.
+Betätige dazu den _Sync_-Knopf open rechts. Du musst dich registrieren, falls
+noch nicht geschehen.
+
+Wenn die Synchronisierung abgeschlossen ist, kannst du über einen Web-Browser
+auf deinem Smartphone unter https://ankiweb.net/ lernen. Wenn du eine App
+bevorzugst, probiere
+[AnkiDroid](https://play.google.com/store/apps/details?id=com.ichi2.anki&hl=de_AT&gl=US&pli=1)
+(for Android-Handys, gratis)
+oder
+[Anki Mobile](https://apps.apple.com/de/app/ankimobile-flashcards/id373493387)
+(mobile Apple-Geräte, z.B. iPhone or iPad, ~30€).
+
+### Schritt 5: Vorlese-Funktion in AnkiDroid konfigurieren (optional)
+Bei Benutzung von AnkiDroid wird empfohlen Text-to-speech unter
+_Settings | Advanced | Text to speech_ zu aktivieren. Wie bei der Desktop-App
+werden dann bei den Zuhör-Übungen chinesische Begriffe laut abgespielt. Für
+andere Karten-Typen erfolgt die Sprachausgabe auf der Rückseite der
+Karteikarte. Um erneut abzuspielen, gibt es in _AnkiDroid_ einen Play-Button in
+der Menüleiste oben. Der Button ist möglicherweise ausgeblendet. Er lässt sich
+unter _Settings | Reviewing | App bar buttons | Replay audio_ einblenden, indem
+man die Einstellung auf _Always show_ setzt.
+
+Auf anderen Plattformen wie _AnkiWeb_, _Anki Mobile_ oder auf der PC-Version
+von Anki ist keine Konfiguration erforderlich. Hier kann der Play-Button auf
+der Karte verwendet werden.
+
+### Step 5: Genießen!
+Das war's, viel Spaß beim lernen!
+
+## Fortgeschrittene Anwendung
+### Wie kann ich mir die Strichfolge für ein chinesisches Zeichen ansehen?
+Wenn du ein animiertes chinesisches Zeichen siehst, kannst du darauf klicken
+bzw. es berühren. Es öffnet sich eine Tabelle mit den einzelnen Strichen, z.B.:
+![Screenshot of the template in AnkiDroid](docs/screenshots/screenshot-practice-writing.png)
+
+### Auf eine neuere Version updaten
+Wenn eine neuere Version als apkg verfügbar ist und du updaten möchtest, folge
+noch einmal den Schritten oben. Neue Vokabeln und Features werden importiert,
+aber dein bisheriger Fortschritt bleibt.
+
+### Wenn ich ein Smartphone verwende, brauche ich dann trotzdem die PC-Version?
+Ja, mit der PC-Version kann das _apkg_ importiert bzw. upgedated werden. Sobald
+du deine Kartensammlung mit Anki Web synchronisiert hast, kannst du auch auf
+_AnkiDroid_, _Anki Mobile_ oder _Anki Web_ von einem Smartphone aus lernen.
+
+## Anpassung
+Siehe dazu die englische Version unter _Advanced usage and customization_.
+
+## Zum Kartendeck beitragen
+Du kannst gern ein GitHub-Issue anlegen wenn du Schwierigkeiten bei der
+Verwendung hast. Ein Pull-Request freut mich natürlich noch mehr. Für
+Verbesserungsvorschläge auch gerne Issues anlegen.
+
+Wenn du selbst kein sehr technischer Benutzer bist aber trotzdem neue Wörter
+hinzufügen willst, kannst du auch gerne ein Issue mit deinen Wörtern anlegen
+und ich helfe dabei.
+
+# 貘老师的汉语 (English version)
 This is a flashcard deck for the popular _Anki_ app to learn Mandarin Chinese.
 It is targeted at native speakers of _German_ and includes cards to practice:
 * listening to and understanding Chinese speech,
