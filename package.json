@@ -1,6 +1,6 @@
 {
   "name": "anki-template-hanyu",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "description": "Anki template for learning to write, speak and understand Mandarin Chinese",
   "repository": "https://github.com/tapirbug/anki-template-hanyu",
   "author": "Philipp Stadler <hello@phstadler.com>",
@@ -55,6 +55,6 @@
     "fix": "eslint --fix --ext .ts src",
     "dev": "parcel serve",
     "clean": "rm -rf anki-template-hanyu-$npm_package_version *.build-in-progress",
-    "build": "yarn run clean && parcel build --no-source-maps --dist-dir=anki-template-hanyu-$npm_package_version.build-in-progress && cp LICENSE NOTICE anki-template-hanyu-$npm_package_version.build-in-progress && build/apkg.py src/skeleton.apkg anki-template-hanyu-$npm_package_version.build-in-progress hanyu-$npm_package_version && mv anki-template-hanyu-$npm_package_version.build-in-progress anki-template-hanyu-$npm_package_version"
+    "build": "yarn run clean && parcel build --no-source-maps --dist-dir=anki-template-hanyu-$npm_package_version.build-in-progress && cp -r LICENSE NOTICE README.md docs anki-template-hanyu-$npm_package_version.build-in-progress && build/apkg.py src/skeleton.apkg anki-template-hanyu-$npm_package_version.build-in-progress hanyu-$npm_package_version && mv anki-template-hanyu-$npm_package_version.build-in-progress anki-template-hanyu-$npm_package_version"
   }
 }

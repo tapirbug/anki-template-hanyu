@@ -1,33 +1,101 @@
-# Anki Template Hanyu
-This is an Anki template that I use to learn Mandarin Chinese.
-You can use it as a basis for your own or use it as-is.
+# 貘老师的汉语
+This is a flashcard deck for the popular _Anki_ app to learn Mandarin Chinese.
+It is targeted at native speakers of _German_ and includes cards to practice:
+* listening to and understanding Chinese speech,
+* reading Hànzì and Pīnyīn,
+* writing Hànzì,
+* translating German words and expressions to Chinese.
 
-## Usage
-Easiest to get started is to download the latest apkg release from the
-[Releases](https://github.com/tapirbug/anki-template-hanyu/releases) section
-on the GitHub repo. You can import such a file on Anki desktop and start using
-the template.
+You can use this deck as-is or customize it to your needs. For example, you
+can add new words within Anki, or you can change the translations of existing
+words to some other language if you don't speak German. You don't need any
+coding skills to do any of this.
 
-## Customization
+If you like coding, you can also check out this repository and customize the
+template for your own needs. See below for details.
+
+## Quickstart guide
+If you just want to practice as quick as possible, follow these steps.
+
+### Step 1: Download apkg
+Download the latest deck as an _apkg_ file from the
+[Releases](https://github.com/tapirbug/anki-template-hanyu/releases)
+section on the GitHub repo, e.g. download `hanyu-0.9.0.apkg` and save it on
+your PC.
+
+### Step 2: Install Anki Desktop
+If you don't yet have Anki installed, download a version for your PC from the
+official [Anki](https://apps.ankiweb.net/#download) website. Install it to
+your PC.
+
+### Step 3: Import the Deck
+Import the _apkg_ deck into Anki with _File | Import…_ on Anki Desktop:
+
+![_File | Import…_ dialog in Anki Desktop](docs/screenshots/screenshot-anki-import.png)
+
+![_hanyu-0.9.0.apkg_ in the file open dialog of Anki Desktop](docs/screenshots/screenshot-anki-import-dialog.png)
+
+That's all you need to practice on your PC. Go ahead and try it out!
+
+### Step 4: Set up Anki on your phone (optional)
+A nice feature of Anki is that you can also practice on your phone or other
+device. If you don't need this right now, skip this step completely or do it
+later.
+
+First, make sure that your collection of cards is synced to the web. Hit the
+_Sync_ button on the top right in Anki Desktop to do this. You may need to
+register if you don't yet have an account on Anki Web.
+
+When the synchronization has finished, you can practice over the web on any
+device including your mobile phone by visiting https://ankiweb.net/ in your
+browser. If you prefer a native app, try
+[AnkiDroid](https://play.google.com/store/apps/details?id=com.ichi2.anki&hl=de_AT&gl=US&pli=1)
+(for Android phones, free)
+or
+[Anki Mobile](https://apps.apple.com/de/app/ankimobile-flashcards/id373493387)
+(mobile Apple devices, e.g. iPhone or iPad, ~30€).
+
+### Step 5: Configuring text-to-speech on AnkiDroid (optional)
+When using AnkiDroid, it is recommended to activate text-to-speech under
+_Settings | Advanced | Text to speech_. This will speak the characters out loud
+when practicing listening (or for other cards when the backside is shown). To
+replay the sound, use the play button in the menu bar. This button may be
+invisible for you unless you change it to _Always show_ under _Settings |
+Reviewing | App bar buttons | Replay audio_.
+
+On other platforms like _AnkiWeb_, _Anki Mobile_ or on the desktop version of
+Anki, no configuration is needed for text-to-speech. You can use the play
+button within the template to replay without extra configuration.
+
+### Step 5: Enjoy!
+That's it, have fun learning!
+
+## Advanced usage
+### How do I view the individual strokes of a Chinese character?
+Whenever you see a chinese character, there is also an animation to showcase
+the correct stroke order. If the animation is too fast or too slow for you,
+instead tap or click the character in question. This will show you all the
+strokes in sequence, e.g.:
+![Screenshot of the template in AnkiDroid](docs/screenshots/screenshot-practice-writing.png)
+
+### Updating to a newer version
+If a newer version of this template is available and you want to update, repeat
+the guide above with the newer apkg. This will give you the newest features
+and vocabulary, but will keep your progress with the vocabulary you already
+learned.
+
+### As a smartphone user, do I need the PC version at all?
+Yes, you need the desktop version to import the _apkg_ and to update to newer
+versions. Once you have synced your card collection with this deck to the web,
+you can also practice with _AnkiDroid_, _Anki Mobile_ or _Anki Web_.
+
+## Advanced usage and customization
 Many customizations to this template can be done right in Anki. For example,
 you can change the vocabulary or add new words, change the names of templates
 (e.g. "Lesen (Pīnyīn)" to something else). You can also add extra CSS for minor
 optical tweaks. Changing the HTML will be a bit more involved, but if you want
 to do some deeper customization or add new features, you can follow the steps
 in _Building_ to generate customized HTML.
-
-### Fields
-Anki also allows customizing the kinds of fields your notes have under
-_Fields…_.
-
-Before customizing them, note that the template assumes that you have some
-fields present that come with the `apkg`. The following fields are expected:
-* `Deutsch`,
-* `汉字` (chinese characters to learn, also used for text-to-speech),
-* `Pīnyīn`.
-
-Changing their names would require customizing the HTML to match which can be
-a bit tedious.
 
 ## Building
 Read this section if you want to make a customized version of the template,
@@ -55,9 +123,11 @@ Run a dev server at https://localhost:1234/:
     yarn dev
 
 If you are seeing a collection of links to the various templates at
-https://localhost:1234/, it worked. You can modify the templates by playing
-with the HTML, CSS and JS files in the `src` directory. Any changes should be
-visible without refreshing your tab during development.
+https://localhost:1234/, it worked.
+
+You can modify the templates by playing with the HTML, CSS and JS files in the
+`src` directory. Any changes should be visible without refreshing your tab
+during development.
 
 ### Building HTML and apkg
 When you are happy with your changes, run:
@@ -68,22 +138,36 @@ If everything worked out, you should have a directory like
 `anki-template-hanyu-1.2.3` with your freshly baked templates and an `apkg`
 package to import into anki.
 
-If you get errors, you can still configure the templates manually as described
-below.
+Please note that the build is severely under-tested. _Arch Linux_ is confirmed
+to work, but if you are experiencing issues with the build on other platforms,
+feel free to file a bug.
 
-### Manually Configuring the Templates in Anki
-Don't worry if the build "script" failed. It was inevitable. I only tested this
-on Arch Linux and it is one line of rushed shell stuff. Just do the following
-manually you should end up with pretty much the same result as importing the
-apkg:
-1. run `yarn run parcel build`
-2. rename `dist` to something nice like `anki-template-hanyu`
+### Customizing vocabulary in release
+To customize the vocabulary that is shipped with your release, customize
+`src/skeleton.apkg` before building.
 
-One way or the other you are going to find a `templates` directory in your
-build, with several sub-directories for each type of templates with
-`front.html`/`back.html` in it. You can create one note type for each
-subdirectory of templates you are interested in and copy/paste `front.html`/
-`back.html` into your Anki card templates.
+The easiest way to do this is to use an existing release and to import it into
+Anki. Customize the vocabulary and export a new apkg. Use this apkg to replace
+`src/skeleton.apkg` and build again, which will combine your skeleton with the
+HTML/JS/CSS in `src` to make a new apkg in your release dirctory.
+
+A minimal version of your skeleton will be saved to the release directory, e.g.
+`anki-template-hanyu-0.9.0/skeleton-0.9.0.apkg`. You can replace
+`src/skeleton.apkg` with that file to save some space. You only need to do this
+if you want to contribute your changes back to this repository.
+
+### Fields
+Anki also allows customizing the kinds of fields your notes have under
+_Fields…_.
+
+Before customizing them, note that the template assumes that you have some
+fields present that come with the _apkg_. The following fields are expected:
+* `Deutsch`,
+* `汉字` (chinese characters to learn, also used for text-to-speech),
+* `Pīnyīn`.
+
+Changing the names of these fields requires customizing the HTML to match. This
+can be tedious and is not recommended.
 
 ## Contributing
 Feel free to raise a Github issue if you are experiencing issues or have any
