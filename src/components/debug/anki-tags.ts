@@ -23,8 +23,6 @@ export function renderAnkiTagsInElement (element: Element): void {
       if (replacement !== null) {
         child.replaceWith(...replacement)
       }
-    } else {
-      console.log('not rendering child: ', child)
     }
   }
 }
@@ -44,7 +42,7 @@ function renderTextNode (
   fromIdx: number
 ): Node[] | null {
   const tagStart = text.indexOf('{{', fromIdx)
-  if (tagStart > 0) {
+  if (tagStart >= 0) {
     // tag found
     const tagContentStart = tagStart + '{{'.length
     const tagEnd = text.indexOf('}}', tagContentStart)
@@ -58,7 +56,6 @@ function renderTextNode (
       : tagContent.indexOf(' ')
     const tagName = tagContent.substring(0, tagNameEndExcl)
     // ignore the tag arguments for now
-
     rendered ??= []
 
     if (tagStart > fromIdx) {
@@ -111,7 +108,7 @@ function replaceFrontLater (loading: Element): void {
     front.classList.add('front')
     front.innerHTML = frontHtml
     renderAnkiTagsInElement(front)
-    loading.replaceWith(front)
+    loading.replaceWith(...Array.from(front.childNodes))
     // in case there are writers or something like that, initialize them
     initWrite.init()
     initTts.init()
