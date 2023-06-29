@@ -1,20 +1,20 @@
 import HanziWriter from 'hanzi-writer'
 import { colorFg } from './colors'
 
-interface Strokes {
+export interface Strokes {
   /**
    * The container for the strokes, initially empty. If `appendTo` was
-   * specified during creation, this property has the same value. Connecting it
-   * to the DOM is up to the caller.
+   * specified during creation, then this container is contained within.
+   * Otherwise it is up to the caller to connect this element to the DOM
+   * somewhere.
    */
-  container: HTMLElement
+  container: HTMLDivElement
 }
 
-interface StrokesOpts {
+export interface StrokesOpts {
   /**
-   * A container to use. If not specified, creates a new DIV instead. Such an
-   * automatically created div is not present in the DOM, but can be retrieved
-   * and connected by inspecting the return value.
+   * A container to use. If not specified, the container for the strokes is
+   * returned without adding it to the DOM.
    */
   appendTo: HTMLElement | undefined | null
   /**
@@ -26,10 +26,12 @@ interface StrokesOpts {
 const strokeSize: number = 75
 
 /**
- * Returns a container for the strokes of a given character, initially empty
- * and unconnected to the dom. The container initially has the  classes
- * `strokes is-loading`. SVG children for the strokes will be added as they
- * are loading in the background.
+ * Returns a container for the strokes of a given character. The container
+ * initially has the classes `strokes is-loading`. SVG children for the strokes
+ * will be added as they are loading in the background.
+ *
+ * When `appendTo` is specified, the strokes container will be added to the end
+ * of that element.
  *
  * The rendered result looks something like this when fully loaded:
  * ```
@@ -43,9 +45,13 @@ const strokeSize: number = 75
  * ```
  */
 export function createStrokes ({ appendTo, character }: StrokesOpts): Strokes {
-  const container = appendTo ?? document.createElement('div')
+  const container = document.createElement('div')
   container.classList.add('strokes')
   container.classList.add('is-loading')
+  if (appendTo != null) {
+    appendTo.appendChild(container)
+  }
+
   HanziWriter.loadCharacterData(character).then(character => {
     if (character == null) {
       return

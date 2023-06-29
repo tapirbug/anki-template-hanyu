@@ -1,3 +1,11 @@
-.stroke.is-inactive {
+.writer.is-active {
+  border-bottom: 1px solid #222222;
+}
+
+.nightMode .writer.is-active {
+  border-bottom: 1px solid #FFFFFF;
+}
+
+.strokes.is-inactive {
   display: none;
 }
