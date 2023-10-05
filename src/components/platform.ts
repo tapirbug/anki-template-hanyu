@@ -12,8 +12,8 @@ export function isOnPlatform (...anyOfPlatforms: Platform[]): boolean {
 function detectPlatform (): Platform {
   const htmlClasses = document.documentElement.classList
   if ((htmlClasses.contains('linux') && !htmlClasses.contains('android')) ||
-      htmlClasses.contains('win') ||
-      htmlClasses.contains('max')) {
+    htmlClasses.contains('win') ||
+    htmlClasses.contains('mac')) {
     return Platform.Desktop
   }
 
