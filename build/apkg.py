@@ -123,7 +123,7 @@ def apkg(ref_apkg_path, build_dir, output_apkg_basename):
     limit = None,
     with_scheduling = False,
     with_media = True,
-    legacy_support = False
+    legacy_support = True
   )
 
   # done with the collection
