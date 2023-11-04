@@ -127,6 +127,8 @@ function initWrite (
       writersContainer.append('，')
     } else if (char.length === 0 || char === ' ') {
       writersContainer.append(' ')
+    } else if (char === '/') {
+      writersContainer.append(char)
     } else if (/[\u3400-\u9FBF]/.test(char)) {
       const hanziWriter = HanziWriter.create(
         writersContainer,
