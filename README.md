@@ -270,7 +270,9 @@ Before customizing them, note that the template assumes that you have some
 fields present that come with the _apkg_. The following fields are expected:
 * `Deutsch`,
 * `汉字` (chinese characters to learn, also used for text-to-speech),
-* `Pīnyīn`.
+* `Pīnyīn`,
+* `Bemerkungen`,
+* `Beispiele`.
 
 Changing the names of these fields requires customizing the HTML to match. This
 can be tedious and is not recommended.
