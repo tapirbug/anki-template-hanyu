@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from anki.collection import Collection
+from anki.collection import Collection, ImportAnkiPackageRequest
 from anki.importing.apkg import AnkiPackageImporter
 import os
 import shutil
@@ -71,7 +71,7 @@ def apkg(ref_apkg_path, build_dir, output_apkg_basename):
 
   # and patch it first with the skeleton contents
   collection = Collection(output_anki2_path)
-  collection.import_anki_package(ref_apkg_path)
+  collection.import_anki_package(ImportAnkiPackageRequest(package_path=ref_apkg_path))
   for name_and_id in collection.models.all_names_and_ids():
     notetype = collection.models.get(name_and_id.id)
     
