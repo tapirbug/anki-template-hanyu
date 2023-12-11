@@ -8,12 +8,18 @@ import sys
 templates = [
   (
     # if this key phrase is found on the front template
-    "anki-template-hanyu-speak",
+    "facts-q-a-front",
     # then use front.html and back.html in this directory for the card type
-    "templates/molaoshi/speak",
+    "templates/facts/q_a",
     # and for skeleton apkg use this front HTML
-    "anki-template-hanyu-speak-front {{Deutsch}}",
+    "facts-q-a-front {{Front}}",
     # and this back HTML
+    "facts-q-a-back {{Back}}"
+  ),
+  (
+    "anki-template-hanyu-speak",
+    "templates/molaoshi/speak",
+    "anki-template-hanyu-speak-front {{Deutsch}}",
     "anki-template-hanyu-speak-back {{Pīnyīn}}"
   ),
   (

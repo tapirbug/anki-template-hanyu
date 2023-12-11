@@ -8,13 +8,26 @@
   text-align: center;
 }
 
-.exercise-kind {
+.exercise-kind, .exercise-category {
   font-size: 0.7rem;
   color: rgba(0, 0, 0, 0.5);
-  text-align: left;
+  margin-bottom: 1.5em;
 }
 
-.nightMode .exercise-kind {
+.exercise-kind {
+  float: left;
+}
+
+.exercise-category {
+  float: right;
+}
+
+.prompt {
+  clear: both;
+}
+
+.nightMode .exercise-kind,
+.nightMode .exercise-category {
   color: rgba(255, 255, 255, 0.5);
 }
 

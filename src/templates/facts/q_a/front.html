@@ -1,0 +1,23 @@
+<style>
+  @import url(../../../components/global.css);
+  @import url(../../../components/facts.css);
+</style>
+
+<div class="exercise front facts-q-a-front">
+  <aside class="exercise-kind">
+    {{Card}}
+  </aside>
+  <aside class="exercise-category">
+    {{Subdeck}}
+  </aside>
+
+  <div class="prompt facts-question">
+    {{Front}}
+  </div>
+
+  <include src="src/components/notice/notice.html"></include>
+</div>
+
+<script type="module">
+  import '../../../components/debug'
+</script>

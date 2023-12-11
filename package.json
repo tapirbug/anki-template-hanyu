@@ -1,6 +1,6 @@
 {
   "name": "anki-template-hanyu",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Anki template for learning to write, speak and understand Mandarin Chinese",
   "repository": "https://github.com/tapirbug/anki-template-hanyu",
   "author": "Philipp Stadler <hello@phstadler.com>",
@@ -25,6 +25,8 @@
   },
   "source": [
     "src/index.html",
+    "src/templates/facts/q_a/front.html",
+    "src/templates/facts/q_a/back.html",
     "src/templates/hanzi/read/front.html",
     "src/templates/hanzi/read/back.html",
     "src/templates/hanzi/write/front.html",
