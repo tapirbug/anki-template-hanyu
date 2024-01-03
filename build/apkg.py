@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from anki.collection import Collection, ImportAnkiPackageRequest
+from anki.collection import Collection, ImportAnkiPackageRequest, ExportAnkiPackageOptions
 from anki.importing.apkg import AnkiPackageImporter
 import os
 import shutil
@@ -100,9 +100,11 @@ def apkg(ref_apkg_path, build_dir, output_apkg_basename):
   collection.export_anki_package(
     out_path = output_skeleton_apkg_path,
     limit = None,
-    with_scheduling = False,
-    with_media = True,
-    legacy_support = False
+    options = ExportAnkiPackageOptions(
+      with_scheduling = False,
+      with_media = True,
+      legacy = False,
+    ),
   )
 
   # and patch it with templates from the build
@@ -123,13 +125,17 @@ def apkg(ref_apkg_path, build_dir, output_apkg_basename):
       collection.models.save(notetype)
       print(f'patches saved for {notetype["name"]}')
 
-  # export the result with rich templates as apkg
+  # export the result with rich templates support as apkg
   collection.export_anki_package(
     out_path = output_apkg_path,
     limit = None,
-    with_scheduling = False,
-    with_media = True,
-    legacy_support = True
+    options = ExportAnkiPackageOptions(
+      with_scheduling = False,
+      with_media = True,
+      # FIXME this should actually be enabled, but fails with some obscure error message,
+      #       should be changed if it works again in a future anki version
+      legacy = False,
+    ),
   )
 
   # done with the collection
