@@ -1,3 +1,7 @@
+# ARCHIVED
+This project has moved to [Uni Wien GitLab](https://gitlab.phaidra.org/kartenaale/sinologie-anki-pack). The Github version will no longer receive updates.
+
+Original readme below:
 # 貘老师的汉语
 _English version below_
 
